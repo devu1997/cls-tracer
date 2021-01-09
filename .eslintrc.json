@@ -1,0 +1,44 @@
+{
+  "extends": "./node_modules/gts/",
+  "parser": "@typescript-eslint/parser",
+  "rules": {
+    "no-var": "error",
+    "semi": "error",
+    "indent": ["error", 2, {
+      "SwitchCase": 1
+    }],
+    "max-len": ["error", 150],
+    "no-console": ["error"],
+    "no-multi-spaces": "error",
+    "space-in-parens": "error",
+    "no-multiple-empty-lines": "error",
+    "prefer-const": "error",
+    "no-use-before-define": "error",
+    "@typescript-eslint/no-unused-vars-experimental": "error",
+    "@typescript-eslint/no-unused-vars": "off",
+    "sort-imports": ["error", {
+      "ignoreCase": true,
+      "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
+    }],
+    "no-return-await": "error",
+    "no-promise-executor-return": "error",
+    "no-unreachable-loop": "error",
+    "class-methods-use-this": "error",
+    "curly": "error",
+    "guard-for-in": "error",
+    "no-else-return": "error",
+    "no-implicit-globals": "error",
+    "no-return-assign": "error",
+    "no-throw-literal": "error",
+    "no-void": "error",
+    "require-await": "error",
+    "no-undef-init": "error",
+    "camelcase": "error",
+    "capitalized-comments": "error",
+    "prefer-destructuring": "error",
+    "prefer-template": "error",
+    "prefer-spread": "error",
+    "@typescript-eslint/explicit-member-accessibility": "error",
+    "no-restricted-syntax": ["error", "ExportDefaultDeclaration"]
+  }
+}
