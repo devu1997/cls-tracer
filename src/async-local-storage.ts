@@ -1,6 +1,6 @@
 import { AsyncLocalStorage } from 'async_hooks';
 
-export const asyncLocalStorage = new AsyncLocalStorage<Map<string, any>>();  // eslint-disable-line @typescript-eslint/no-explicit-any
+export const asyncLocalStorage = new AsyncLocalStorage<Map<string, unknown>>();
 export const ID = 'id';
 
 /**
@@ -9,7 +9,7 @@ export const ID = 'id';
  */
 export function id(): string | undefined {
   const store = asyncLocalStorage.getStore();
-  return store?.get(ID);
+  return store?.get(ID) as string;
 }
 
 /**
@@ -17,7 +17,7 @@ export function id(): string | undefined {
  * initialized for this request orif a value is not found for the specified key.
  * @param {string} key
  */
-export function get(key: string): any { // eslint-disable-line @typescript-eslint/no-explicit-any
+export function get(key: string): unknown {
   const store = asyncLocalStorage.getStore();
   return store?.get(key);
 }
@@ -28,7 +28,7 @@ export function get(key: string): any { // eslint-disable-line @typescript-eslin
  * @param {string} key
  * @param {any} value
  */
-export function set(key: string, value: any): void { // eslint-disable-line @typescript-eslint/no-explicit-any
+export function set(key: string, value: unknown): void {
   const store = asyncLocalStorage.getStore();
   store?.set(key, value);
 }
