@@ -1,4 +1,4 @@
-import { tracer, jobTracer } from 'cls-tracer';
+import tracer from 'cls-tracer';
 import { logger } from './logger';
 
 function fakeAsyncTask(): Promise<void> {
@@ -17,4 +17,4 @@ async function sampleJob(): Promise<void> {
   await fakeAsyncTask();
 }
 
-setInterval(jobTracer, 10000, sampleJob, { useJobId: true });
+setInterval(tracer.jobMiddleware, 10000, sampleJob, { useJobId: true });

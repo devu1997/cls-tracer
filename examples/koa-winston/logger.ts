@@ -1,5 +1,5 @@
 import { createLogger, format, transports, Logger as WinstonLogger } from 'winston';
-import { tracer } from 'cls-tracer';
+import tracer from 'cls-tracer';
 
 const LEVEL = Symbol.for('level');
 const MESSAGE = Symbol.for('message');

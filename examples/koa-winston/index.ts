@@ -1,9 +1,8 @@
 import http from 'http';
 import Koa, { Context } from 'koa';
-import { koaTracer } from 'cls-tracer';
 import { logger } from './logger';
 import Router from 'koa-router';
-import { tracer } from 'cls-tracer';
+import tracer from 'cls-tracer';
 
 async function fakeAsyncTask(): Promise<void> {
   return new Promise((resolve) => {
@@ -32,7 +31,7 @@ function startHttpServer(): void {
 
   app.context.api = true;
   app.use(
-    koaTracer({
+    tracer.koaMiddleware({
       useRequestId: true,
       useHeader: true,
       echoHeader: true

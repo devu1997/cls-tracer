@@ -1,6 +1,6 @@
 
 import Koa from 'koa';
-import { koaTracer, tracer } from '../src';
+import tracer from '../src';
 import request from 'supertest';
 
 describe('cls-tracer for koa', () => {
@@ -13,7 +13,7 @@ describe('cls-tracer for koa', () => {
   test('generates id for request', async () => {
     const app = new Koa();
 
-    app.use(koaTracer({
+    app.use(tracer.koaMiddleware({
       useRequestId: true
     }));
     app.use((ctx) => {
@@ -31,7 +31,7 @@ describe('cls-tracer for koa', () => {
     const app = new Koa();
     const idFactory = () => 'generatedId';
 
-    app.use(koaTracer({
+    app.use(tracer.koaMiddleware({
       useRequestId: true,
       requestIdFactory: idFactory
     }));
@@ -50,7 +50,7 @@ describe('cls-tracer for koa', () => {
     const app = new Koa();
     const idInHeader = 'id-from-header';
 
-    app.use(koaTracer({
+    app.use(tracer.koaMiddleware({
       useRequestId: true
     }));
     app.use((ctx) => {
@@ -69,7 +69,7 @@ describe('cls-tracer for koa', () => {
     const app = new Koa();
     const idInHeader = 'id-from-header';
 
-    app.use(koaTracer({
+    app.use(tracer.koaMiddleware({
       useRequestId: true,
       useHeader: true
     }));
@@ -88,7 +88,7 @@ describe('cls-tracer for koa', () => {
     const app = new Koa();
     const idInHeader = 'id-from-header';
 
-    app.use(koaTracer({
+    app.use(tracer.koaMiddleware({
       useRequestId: true,
       useHeader: true,
       headerName: 'new-header'
@@ -107,7 +107,7 @@ describe('cls-tracer for koa', () => {
   test('ignores header if not set', async () => {
     const app = new Koa();
 
-    app.use(koaTracer({
+    app.use(tracer.koaMiddleware({
       useRequestId: true,
       useHeader: true
     }));
@@ -126,7 +126,7 @@ describe('cls-tracer for koa', () => {
     const app = new Koa();
     const idInHeader = 'id-from-header';
 
-    app.use(koaTracer({
+    app.use(tracer.koaMiddleware({
       useRequestId: true,
       useHeader: false
     }));
@@ -146,7 +146,7 @@ describe('cls-tracer for koa', () => {
     const app = new Koa();
     const idInHeader = 'id-from-header';
 
-    app.use(koaTracer({
+    app.use(tracer.koaMiddleware({
       useRequestId: true,
       useHeader: false
     }));
@@ -165,7 +165,7 @@ describe('cls-tracer for koa', () => {
   test('do not echo header by default', async () => {
     const app = new Koa();
 
-    app.use(koaTracer({
+    app.use(tracer.koaMiddleware({
       useRequestId: true
     }));
     app.use((ctx) => {
@@ -184,7 +184,7 @@ describe('cls-tracer for koa', () => {
     const app = new Koa();
     const idInHeader = 'id-from-header';
 
-    app.use(koaTracer({
+    app.use(tracer.koaMiddleware({
       useRequestId: true,
       useHeader: true,
       echoHeader: false
@@ -205,7 +205,7 @@ describe('cls-tracer for koa', () => {
   test('echo header', async () => {
     const app = new Koa();
 
-    app.use(koaTracer({
+    app.use(tracer.koaMiddleware({
       useRequestId: true,
       useHeader: true,
       echoHeader: true
@@ -225,7 +225,7 @@ describe('cls-tracer for koa', () => {
   test('set a key along with generating request id', async () => {
     const app = new Koa();
 
-    app.use(koaTracer({
+    app.use(tracer.koaMiddleware({
       useRequestId: true
     }));
     app.use((ctx, next) => {
@@ -248,7 +248,7 @@ describe('cls-tracer for koa', () => {
   test('set a key without generating request id', async () => {
     const app = new Koa();
 
-    app.use(koaTracer());
+    app.use(tracer.koaMiddleware());
     app.use((ctx, next) => {
       tracer.set('key', 'value');
       next();

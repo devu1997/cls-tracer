@@ -1,5 +1,5 @@
 
-import { tracer, jobTracer } from '../src';
+import tracer from '../src';
 
 describe('cls-tracer for jobs', () => {
 
@@ -16,7 +16,7 @@ describe('cls-tracer for jobs', () => {
       }, 0);
       return id;
     }
-    const id = jobTracer(job, { useJobId: true });
+    const id = tracer.jobMiddleware(job, { useJobId: true });
     expect(id?.length).toBeGreaterThan(0);
   });
 
@@ -31,7 +31,7 @@ describe('cls-tracer for jobs', () => {
       }, 0);
       return id;
     };
-    const id = jobTracer(job, { useJobId: true, jobIdFactory: idFactory });
+    const id = tracer.jobMiddleware(job, { useJobId: true, jobIdFactory: idFactory });
     expect(id).toBe('generatedId');
   });
 
@@ -51,7 +51,7 @@ describe('cls-tracer for jobs', () => {
         key: tracer.get('key')
       };
     };
-    const res = jobTracer(job, { useJobId: true, jobIdFactory: idFactory });
+    const res = tracer.jobMiddleware(job, { useJobId: true, jobIdFactory: idFactory });
     expect(res.id).toBe('generatedId');
     expect(res.key).toBe('value');
   });
@@ -70,7 +70,7 @@ describe('cls-tracer for jobs', () => {
         key: tracer.get('key')
       };
     };
-    const res = jobTracer(job);
+    const res = tracer.jobMiddleware(job);
     expect(res.id).toBeUndefined();
     expect(res.key).toBe('value');
   });
