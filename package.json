@@ -1,6 +1,6 @@
 {
   "name": "cls-tracer",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "Async local storage for Koa and custom jobs with out of the box support for tracing request/job id",
   "readme": "README.md",
   "main": "dist/src/index.js",

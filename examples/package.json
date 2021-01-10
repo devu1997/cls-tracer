@@ -13,7 +13,7 @@
   "author": "devikasudheer23@gmail.com",
   "license": "MIT",
   "dependencies": {
-    "cls-tracer": "^1.0.1",
+    "cls-tracer": "^1.0.0",
     "koa": "^2.13.0",
     "koa-router": "^9.4.0",
     "winston": "^3.3.3"
