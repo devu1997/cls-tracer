@@ -63,7 +63,7 @@ describe('cls-tracer for koa', () => {
       };
     });
 
-    const res = await request(app.callback()).get('/').set('x-request-id', idInHeader);
+    const res = await request(app.callback()).get('/').set('X-Request-Id', idInHeader);
     expect(res.status).toBe(200);
     expect(res.body.id.length).toBeGreaterThan(0);
     expect(res.body.id).not.toEqual(idInHeader);
@@ -85,7 +85,7 @@ describe('cls-tracer for koa', () => {
       };
     });
 
-    const res = await request(app.callback()).get('/').set('x-request-id', idInHeader);
+    const res = await request(app.callback()).get('/').set('X-Request-Id', idInHeader);
     expect(res.status).toBe(200);
     expect(res.body.id).toEqual(idInHeader);
   });
@@ -148,7 +148,7 @@ describe('cls-tracer for koa', () => {
       };
     });
 
-    const res = await request(app.callback()).get('/').set('x-request-id', idInHeader);
+    const res = await request(app.callback()).get('/').set('X-Request-Id', idInHeader);
     expect(res.status).toBe(200);
     expect(res.body.id.length).toBeGreaterThan(0);
     expect(res.body.id).not.toEqual(idInHeader);
@@ -170,7 +170,7 @@ describe('cls-tracer for koa', () => {
       };
     });
 
-    const res = await request(app.callback()).get('/').set('x-request-id', idInHeader);
+    const res = await request(app.callback()).get('/').set('X-Request-Id', idInHeader);
     expect(res.status).toBe(200);
     expect(res.body.id.length).toBeGreaterThan(0);
     expect(res.body.id).not.toEqual(idInHeader);
@@ -193,7 +193,7 @@ describe('cls-tracer for koa', () => {
     const res = await request(app.callback()).get('/');
     expect(res.status).toBe(200);
     expect(res.body.id.length).toBeGreaterThan(0);
-    expect(res.headers['x-request-id']).toBeUndefined();
+    expect(res.get('X-Request-Id')).toBeUndefined();
   });
 
   test('do not echo header', async () => {
@@ -213,11 +213,11 @@ describe('cls-tracer for koa', () => {
       };
     });
 
-    const res = await request(app.callback()).get('/').set('x-request-id', idInHeader);
+    const res = await request(app.callback()).get('/').set('X-Request-Id', idInHeader);
     expect(res.status).toBe(200);
     expect(res.body.id.length).toBeGreaterThan(0);
     expect(res.body.id).toEqual(idInHeader);
-    expect(res.headers['x-request-id']).toBeUndefined();
+    expect(res.get('X-Request-Id')).toBeUndefined();
   });
 
   test('echo header', async () => {
@@ -239,7 +239,7 @@ describe('cls-tracer for koa', () => {
     const res = await request(app.callback()).get('/');
     expect(res.status).toBe(200);
     expect(res.body.id.length).toBeGreaterThan(0);
-    expect(res.headers['x-request-id']).toEqual(res.body.id);
+    expect(res.get('X-Request-Id')).toEqual(res.body.id);
   });
 
   test('set a key along with generating request id', async () => {

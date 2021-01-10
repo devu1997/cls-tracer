@@ -1,7 +1,7 @@
 {
   "name": "cls-tracer",
   "version": "1.0.0",
-  "description": "Async local storage for Koa and background jobs with out of the box support for tracing request id",
+  "description": "Async local storage for Koa and custom jobs with out of the box support for tracing request/job id",
   "readme": "README.md",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
@@ -18,7 +18,7 @@
     "url": "git@github.com:devu1997/cls-tracer.git"
   },
   "engines": {
-    "node": ">=12.17.0"
+    "node": ">=12.17.0 <13.0.0 || >=13.14.0 <14.0.0 || >=14.0.0"
   },
   "author": "devikasudheer23@gmail.com",
   "license": "MIT",

@@ -17,7 +17,7 @@ export function koaMiddleware(options: KoaLocalStorageOptions = {}): Middleware 
   const defaultKoaLocalStorageOptions = {
     useRequestId: false,
     useHeader: false,
-    headerName: 'x-request-id',
+    headerName: 'X-Request-Id',
     requestIdFactory: uuidv1,
     echoHeader: false
   };
@@ -25,7 +25,7 @@ export function koaMiddleware(options: KoaLocalStorageOptions = {}): Middleware 
   return function (ctx: Context, next: Next) {
     const store = new Map<string, unknown>();
     if (useRequestId) {
-      const idFromHeader = ctx.get(headerName);
+      const idFromHeader = ctx.get(headerName.toLowerCase());
       const id = useHeader && idFromHeader ? idFromHeader : requestIdFactory();
       store.set(ID, id);
       if (echoHeader) {
