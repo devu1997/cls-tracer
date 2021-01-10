@@ -1,0 +1,27 @@
+# NODE
+node_modules
+package-lock.json
+
+# IntelliJ
+.idea
+*.iml
+
+# Typescipt
+src
+
+# Examples
+examples
+
+# Codecoverage
+coverage
+
+# Lint
+.eslintrc.json
+.prettierrc.js
+
+# Test
+test
+jest.config.ts
+
+# Git
+.gitignore
