@@ -1,7 +1,8 @@
 # cls-tracer
 
-Continuous local storage for koa and custom jobs based on AsyncLocalStorage. The package is an enhanced version of [cls-rtracer](https://github.com/puzpuzpuz/cls-rtracer) with added support to store any key-value pairs in the local storage.
+Continuous local storage for koa and custom jobs (similar to thread context in java). The package is an enhanced version of [cls-rtracer](https://github.com/puzpuzpuz/cls-rtracer) with added support to store any key-value pairs.
 
+* Based on [AsyncLocalStorage](https://nodejs.org/api/async_hooks.html#async_hooks_class_asynclocalstorage).
 * Out of the box support for request/job id tracing.
 * Supports reading request id from header.
 * Supports writing request id to header.
@@ -18,10 +19,10 @@ As cls-tracer depends on AsyncLocalStorage API, it requires Node.js 12.17.0+, 13
 
 ## Usage - Koa middleware
 
-Register the middleware provided by the library with your koa app. Make sure you use any third party middleware (or plugin) that does not need access to request ids before you use cls-tracer.
+Register the middleware provided by the library with your koa app. Make sure you use any third party middleware that does not need access to local storage before you use cls-tracer.
 
 ```typescript
-import tracer from 'cls-tracer; \\ javascript: const tracer = require('cls-tracer');
+import tracer from 'cls-tracer'; // javascript: const tracer = require('cls-tracer');
 
 const app = new Koa()
 app.use(tracer.koaMiddleware({
@@ -29,18 +30,20 @@ app.use(tracer.koaMiddleware({
   useHeader: true,
   echoHeader: true
 }));
+
+// all code in middlewares, starting from here, has access to the local storage.
 ```
 
-Set a key anywhere in the code inside the async call chain.
-
-```typescript
-tracer.set('key', 'value);
-```
-
-You can access the same request id and keys from any code inside the async call chain that does not have access to the Koa's `context` object.
+If request id is enabled (using enableRequestId config), you can access the same request id inside all middlewares registered after the tracer middleware.
 
 ```typescript
 const id = tracer.id();
+```
+
+You can add any key-value pairs to the local storage and retrieve its value inside all middlewares registered after the tracer middleware.
+
+```typescript
+tracer.set('key', 'value');
 const value = tracer.get('key');
 ```
 
@@ -78,23 +81,23 @@ These are the available config options for the middleware. All config entries ar
 Wrap your job function inside the middleware provided by the library.
 
 ```typescript
-import tracer from 'cls-tracer; \\ javascript: const tracer = require('cls-tracer');
+import tracer from 'cls-tracer'; // javascript: const tracer = require('cls-tracer');
 
 const response = tracer.jobMiddleware(jobFunction, {
   enableJobId: true
 });
 ```
 
-Set a key anywhere in the code inside the async call chain.
-
-```typescript
-tracer.set('key', 'value);
-```
-
-You can access the same request id and keys from anywhere in the code inside the async call chain.
+If job id is enabled (using enableJobId config), you can access the same job id inside all methods.
 
 ```typescript
 const id = tracer.id();
+```
+
+You can add any key-value pairs to the local storage and retrieve its value inside all methods.
+
+```typescript
+tracer.set('key', 'value');
 const value = tracer.get('key');
 ```
 
@@ -121,9 +124,15 @@ These are the available config options for the middleware. All config entries ar
 }
 ```
 
+## Integration with loggers
+
+You can retrieve the request/job id using `tracer.id()` inside the logger to populate request/job ids in the application logs without passing the request id explicitly across all modules.
+
+Refer the examples given [here](https://github.com/devu1997/cls-tracer/tree/master/examples).
+
 ## Performance impact
 
-Note that this library has a certain performance impact on your application due to AsyncLocalStorage API usage.
+Note that this library has a certain performance impact on your application as it is based on [AsyncLocalStorage](https://nodejs.org/api/async_hooks.html#async_hooks_class_asynclocalstorage) which uses [async hooks](https://nodejs.org/api/async_hooks.html).
 
 ## License
 
