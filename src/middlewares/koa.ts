@@ -3,7 +3,7 @@ import { Context, Middleware, Next } from 'koa';
 import { v1 as uuidv1 } from 'uuid';
 
 export interface KoaLocalStorageOptions {
-  readonly useRequestId?: boolean;
+  readonly enableRequestId?: boolean;
   readonly useHeader?: boolean;
   readonly headerName?: string;
   readonly requestIdFactory?: () => string;
@@ -21,10 +21,10 @@ export function koaMiddleware(options: KoaLocalStorageOptions = {}): Middleware 
     requestIdFactory: uuidv1,
     echoHeader: false
   };
-  const { useRequestId, useHeader, headerName, requestIdFactory, echoHeader } = Object.assign(defaultKoaLocalStorageOptions, options);
+  const { enableRequestId, useHeader, headerName, requestIdFactory, echoHeader } = Object.assign(defaultKoaLocalStorageOptions, options);
   return function (ctx: Context, next: Next) {
     const store = new Map<string, unknown>();
-    if (useRequestId) {
+    if (enableRequestId) {
       const idFromHeader = ctx.get(headerName.toLowerCase());
       const id = useHeader && idFromHeader ? idFromHeader : requestIdFactory();
       store.set(ID, id);

@@ -14,7 +14,7 @@ describe('cls-tracer for jobs', () => {
       }, 0);
       return id;
     };
-    const id = tracer.jobMiddleware(job, { useJobId: true });
+    const id = tracer.jobMiddleware(job, { enableJobId: true });
     expect(id?.length).toBeGreaterThan(0);
   });
 
@@ -29,7 +29,7 @@ describe('cls-tracer for jobs', () => {
       }, 0);
       return id;
     };
-    const id = tracer.jobMiddleware(job, { useJobId: true, jobIdFactory: idFactory });
+    const id = tracer.jobMiddleware(job, { enableJobId: true, jobIdFactory: idFactory });
     expect(id).toBe('generatedId');
   });
 
@@ -49,7 +49,7 @@ describe('cls-tracer for jobs', () => {
         key: tracer.get('key')
       };
     };
-    const res = tracer.jobMiddleware(job, { useJobId: true, jobIdFactory: idFactory });
+    const res = tracer.jobMiddleware(job, { enableJobId: true, jobIdFactory: idFactory });
     expect(res.id).toBe('generatedId');
     expect(res.key).toBe('value');
   });

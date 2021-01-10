@@ -13,7 +13,7 @@ describe('cls-tracer for koa', () => {
 
     app.use(
       tracer.koaMiddleware({
-        useRequestId: true
+        enableRequestId: true
       })
     );
     app.use((ctx) => {
@@ -33,7 +33,7 @@ describe('cls-tracer for koa', () => {
 
     app.use(
       tracer.koaMiddleware({
-        useRequestId: true,
+        enableRequestId: true,
         requestIdFactory: idFactory
       })
     );
@@ -54,7 +54,7 @@ describe('cls-tracer for koa', () => {
 
     app.use(
       tracer.koaMiddleware({
-        useRequestId: true
+        enableRequestId: true
       })
     );
     app.use((ctx) => {
@@ -75,7 +75,7 @@ describe('cls-tracer for koa', () => {
 
     app.use(
       tracer.koaMiddleware({
-        useRequestId: true,
+        enableRequestId: true,
         useHeader: true
       })
     );
@@ -96,7 +96,7 @@ describe('cls-tracer for koa', () => {
 
     app.use(
       tracer.koaMiddleware({
-        useRequestId: true,
+        enableRequestId: true,
         useHeader: true,
         headerName: 'new-header'
       })
@@ -117,7 +117,7 @@ describe('cls-tracer for koa', () => {
 
     app.use(
       tracer.koaMiddleware({
-        useRequestId: true,
+        enableRequestId: true,
         useHeader: true
       })
     );
@@ -138,7 +138,7 @@ describe('cls-tracer for koa', () => {
 
     app.use(
       tracer.koaMiddleware({
-        useRequestId: true,
+        enableRequestId: true,
         useHeader: false
       })
     );
@@ -160,7 +160,7 @@ describe('cls-tracer for koa', () => {
 
     app.use(
       tracer.koaMiddleware({
-        useRequestId: true,
+        enableRequestId: true,
         useHeader: false
       })
     );
@@ -181,7 +181,7 @@ describe('cls-tracer for koa', () => {
 
     app.use(
       tracer.koaMiddleware({
-        useRequestId: true
+        enableRequestId: true
       })
     );
     app.use((ctx) => {
@@ -202,7 +202,7 @@ describe('cls-tracer for koa', () => {
 
     app.use(
       tracer.koaMiddleware({
-        useRequestId: true,
+        enableRequestId: true,
         useHeader: true,
         echoHeader: false
       })
@@ -225,7 +225,7 @@ describe('cls-tracer for koa', () => {
 
     app.use(
       tracer.koaMiddleware({
-        useRequestId: true,
+        enableRequestId: true,
         useHeader: true,
         echoHeader: true
       })
@@ -247,7 +247,7 @@ describe('cls-tracer for koa', () => {
 
     app.use(
       tracer.koaMiddleware({
-        useRequestId: true
+        enableRequestId: true
       })
     );
     app.use((_, next) => {

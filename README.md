@@ -2,7 +2,9 @@
 
 Continuous local storage for koa and custom jobs based on AsyncLocalStorage. The package is an enhanced version of [cls-rtracer](https://github.com/puzpuzpuz/cls-rtracer) with added support to store any key-value pairs in the local storage.
 
-* Include out of the box support for request/job id tracing.
+* Out of the box support for request/job id tracing.
+* Supports reading request id from header.
+* Supports writing request id to header.
 * Supports typescript.
 
 ## Supported Node.js versions
@@ -23,7 +25,7 @@ import tracer from 'cls-tracer; \\ javascript: const tracer = require('cls-trace
 
 const app = new Koa()
 app.use(tracer.koaMiddleware({
-  useRequestId: true,
+  enableRequestId: true,
   useHeader: true,
   echoHeader: true
 }));
@@ -50,7 +52,7 @@ These are the available config options for the middleware. All config entries ar
 {
   // If set to true, the middleware will always generate a request id
   // per each request (default: false).
-  useRequestId: false,
+  enableRequestId: false,
   // Respect request header flag (default: false).
   // If set to true, the middleware will always use a value from
   // the specified header (if the value is present).
@@ -79,7 +81,7 @@ Wrap your job function inside the middleware provided by the library.
 import tracer from 'cls-tracer; \\ javascript: const tracer = require('cls-tracer');
 
 const response = tracer.jobMiddleware(jobFunction, {
-  useJobId: true
+  enableJobId: true
 });
 ```
 
@@ -111,7 +113,7 @@ These are the available config options for the middleware. All config entries ar
 {
   // If set to true, the middleware will always generate a job id
   // per each execution of job function wrapped by the middlware (default: false).
-  useJobId: false,
+  enableJobId: false,
   // A custom function to generate your request ids (default: UUID v1).
   // Ignored if useHeader is set to true.
   // Used if useRequestId is set to true.

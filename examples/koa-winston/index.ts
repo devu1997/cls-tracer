@@ -32,7 +32,7 @@ function startHttpServer(): void {
   app.context.api = true;
   app.use(
     tracer.koaMiddleware({
-      useRequestId: true,
+      enableRequestId: true,
       useHeader: true,
       echoHeader: true
     })

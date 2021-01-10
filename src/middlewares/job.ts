@@ -2,7 +2,7 @@ import { asyncLocalStorage, ID } from '../async-local-storage';
 import { v1 as uuidv1 } from 'uuid';
 
 export interface JobLocalStorageOptions {
-  readonly useJobId?: boolean;
+  readonly enableJobId?: boolean;
   readonly jobIdFactory?: () => string;
 }
 
@@ -12,12 +12,12 @@ export interface JobLocalStorageOptions {
  */
 export function jobMiddleware<T>(jobFn: () => T, options: JobLocalStorageOptions = {}): T {
   const defaultJobLocalStorageOptions = {
-    useJobId: false,
+    enableJobId: false,
     jobIdFactory: uuidv1
   };
-  const { useJobId, jobIdFactory } = Object.assign(defaultJobLocalStorageOptions, options);
+  const { enableJobId, jobIdFactory } = Object.assign(defaultJobLocalStorageOptions, options);
   const store = new Map<string, unknown>();
-  if (useJobId) {
+  if (enableJobId) {
     const id = jobIdFactory();
     store.set(ID, id);
   }
