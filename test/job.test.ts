@@ -1,21 +1,19 @@
-
 import tracer from '../src';
 
 describe('cls-tracer for jobs', () => {
-
   test('does not return id outside of job', () => {
-    const id = tracer.id()
-    expect(id).toBeUndefined()
-  })
+    const id = tracer.id();
+    expect(id).toBeUndefined();
+  });
 
-  test('generates id for job', async () => {
+  test('generates id for job', () => {
     const job = () => {
       const id = tracer.id();
       setTimeout(() => {
         expect(tracer.id()).toBe(id);
       }, 0);
       return id;
-    }
+    };
     const id = tracer.jobMiddleware(job, { useJobId: true });
     expect(id?.length).toBeGreaterThan(0);
   });
@@ -35,7 +33,7 @@ describe('cls-tracer for jobs', () => {
     expect(id).toBe('generatedId');
   });
 
-  test('set a key along with generating job id', async () => {
+  test('set a key along with generating job id', () => {
     const idFactory = () => 'generatedId';
 
     const job = () => {
@@ -56,7 +54,7 @@ describe('cls-tracer for jobs', () => {
     expect(res.key).toBe('value');
   });
 
-  test('set a key without generating job id', async () => {
+  test('set a key without generating job id', () => {
     const job = () => {
       const id = tracer.id();
       expect(id).toBeUndefined();

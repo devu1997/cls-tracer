@@ -1,6 +1,7 @@
 {
   "extends": "./node_modules/gts/",
   "parser": "@typescript-eslint/parser",
+  "root": true,
   "rules": {
     "no-var": "error",
     "semi": "error",

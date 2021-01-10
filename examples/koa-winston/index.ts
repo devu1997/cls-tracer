@@ -1,16 +1,16 @@
-import http from 'http';
 import Koa, { Context } from 'koa';
+import http from 'http';
 import { logger } from './logger';
 import Router from 'koa-router';
 import tracer from 'cls-tracer';
 
-async function fakeAsyncTask(): Promise<void> {
+function fakeAsyncTask(): Promise<void> {
   return new Promise((resolve) => {
     setTimeout(() => {
       const data = tracer.get('key');
       logger.info(`Inside fake async task with data ${JSON.stringify(data)}`);
       resolve();
-    }, 0)
+    }, 0);
   });
 }
 
@@ -21,7 +21,7 @@ export async function sample(ctx: Context): Promise<void> {
   logger.info('Inside sample API');
   await fakeAsyncTask();
   ctx.body = {
-    status: 'ok',
+    status: 'ok'
   };
 }
 

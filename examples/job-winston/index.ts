@@ -1,5 +1,5 @@
-import tracer from 'cls-tracer';
 import { logger } from './logger';
+import tracer from 'cls-tracer';
 
 function fakeAsyncTask(): Promise<void> {
   return new Promise((resolve) => {
